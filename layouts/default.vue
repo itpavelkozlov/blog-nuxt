@@ -36,38 +36,14 @@
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
+
       <v-list>
         <v-list-item @click.native="right = !right">
           <v-list-item-action>
@@ -97,15 +73,30 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-home',
+          title: 'Главная',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
+          icon: 'mdi-format-list-bulleted',
+          title: 'Категории',
+          to: '/category'
+        },
+                {
+          icon: 'mdi-tag-multiple',
+          title: 'Теги',
+          to: '/tags'
+        },
+                {
+          icon: 'mdi-archive',
+          title: 'Архив',
+          to: '/archive'
+        },
+                {
+          icon: 'mdi-information',
+          title: 'Об авторе',
+          to: '/info'
+        },
       ],
       miniVariant: false,
       right: true,

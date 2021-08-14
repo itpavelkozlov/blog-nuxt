@@ -1,12 +1,23 @@
 <template>
   <v-app dark>
     <v-navigation-drawer
-      v-model="drawer"
       :mini-variant="miniVariant"
-      :clipped="clipped"
+      :clipped="false"
       fixed
       app
+      permanent
     >
+      <v-card v-if="!miniVariant" class="mx-auto" outlined>
+        <v-avatar class="mx-4 my-4" size="100px">
+          <img
+            alt="Avatar"
+            src="https://avatars.githubusercontent.com/u/70743138?v=4"
+          />
+        </v-avatar>
+        <v-card-title> Developer blog </v-card-title>
+        <v-card-subtitle> Блог про IT </v-card-subtitle>
+      </v-card>
+
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -23,86 +34,78 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
 
+      <v-footer :absolute="true" v-if="!miniVariant">
+        <v-row dense class="text-center">
+          <v-col cols="3">
+            <v-icon>mdi-github</v-icon>
+          </v-col>
+          <v-col cols="3">
+            <v-icon>mdi-email</v-icon>
+          </v-col>
+          <v-col cols="3">
+            <v-icon>mdi-telegram</v-icon>
+          </v-col>
+          <v-col cols="3">
+            <v-icon>mdi-instagram</v-icon>
+          </v-col>
+        </v-row>
+      </v-footer>
+    </v-navigation-drawer>
+
+    <v-app-bar fixed app>
+      <v-btn icon @click.stop="miniVariant = !miniVariant">
+        <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
+      </v-btn>
     </v-app-bar>
+
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
       items: [
         {
-          icon: 'mdi-home',
-          title: 'Главная',
-          to: '/'
+          icon: "mdi-home",
+          title: "Главная",
+          to: "/",
         },
         {
-          icon: 'mdi-format-list-bulleted',
-          title: 'Категории',
-          to: '/category'
+          icon: "mdi-format-list-bulleted",
+          title: "Категории",
+          to: "/category",
         },
-                {
-          icon: 'mdi-tag-multiple',
-          title: 'Теги',
-          to: '/tags'
+        {
+          icon: "mdi-tag-multiple",
+          title: "Теги",
+          to: "/tags",
         },
-                {
-          icon: 'mdi-archive',
-          title: 'Архив',
-          to: '/archive'
+        {
+          icon: "mdi-archive",
+          title: "Архив",
+          to: "/archive",
         },
-                {
-          icon: 'mdi-information',
-          title: 'Об авторе',
-          to: '/info'
+        {
+          icon: "mdi-information",
+          title: "Об авторе",
+          to: "/info",
         },
       ],
       miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
-}
+    };
+  },
+};
 </script>
+
+<style scoped>
+.v-list {
+  padding: 0;
+}
+</style>

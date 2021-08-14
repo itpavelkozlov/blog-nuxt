@@ -7,15 +7,25 @@
       app
       permanent
     >
-      <v-card v-if="!miniVariant" class="mx-auto" outlined>
-        <v-avatar class="mx-4 my-4" size="100px">
-          <img
-            alt="Avatar"
-            src="https://avatars.githubusercontent.com/u/70743138?v=4"
-          />
-        </v-avatar>
+      <v-card class="mx-auto" outlined>
+        <div :class="miniVariant ? `flex-mini` : `flex`">
+          <v-avatar :size=" miniVariant ? `20px`:`100px`">
+            <img
+              alt="Avatar"
+              src="https://avatars.githubusercontent.com/u/70743138?v=4"
+            />
+          </v-avatar>
+
+          <v-btn icon @click.stop="miniVariant = !miniVariant">
+            <v-icon
+              >mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon
+            >
+          </v-btn>
+        </div>
+        <div class="description" v-if="!miniVariant">
         <v-card-title> Developer blog </v-card-title>
         <v-card-subtitle> Блог про IT </v-card-subtitle>
+        </div>
       </v-card>
 
       <v-list>
@@ -54,9 +64,13 @@
     </v-navigation-drawer>
 
     <v-app-bar fixed app>
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
-      </v-btn>
+      <!-- <v-container> -->
+        <v-breadcrumbs :items="breadcrumbs">
+          <template v-slot:divider>
+            <v-icon>mdi-chevron-right</v-icon>
+          </template>
+        </v-breadcrumbs>
+      <!-- </v-container> -->
     </v-app-bar>
 
     <v-main>
@@ -71,6 +85,23 @@
 export default {
   data() {
     return {
+      breadcrumbs: [
+        {
+          text: "Главная",
+          disabled: false,
+          href: "/",
+        },
+        {
+          text: "Link 1",
+          disabled: false,
+          href: "breadcrumbs_link_1",
+        },
+        {
+          text: "Link 2",
+          disabled: true,
+          href: "breadcrumbs_link_2",
+        },
+      ],
       items: [
         {
           icon: "mdi-home",
@@ -108,4 +139,19 @@ export default {
 .v-list {
   padding: 0;
 }
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 16px;
+  padding-top: 16px;
+}
+
+.flex-mini {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 8px;
+}
+
 </style>

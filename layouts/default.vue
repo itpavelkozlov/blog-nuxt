@@ -9,7 +9,7 @@
     >
       <v-card class="mx-auto" outlined>
         <div :class="miniVariant ? `flex-mini` : `flex`">
-          <v-avatar :size=" miniVariant ? `20px`:`100px`">
+          <v-avatar v-if="!miniVariant" :size="miniVariant ? `20px` : `100px`">
             <img
               alt="Avatar"
               src="https://avatars.githubusercontent.com/u/70743138?v=4"
@@ -23,8 +23,8 @@
           </v-btn>
         </div>
         <div class="description" v-if="!miniVariant">
-        <v-card-title> Developer blog </v-card-title>
-        <v-card-subtitle> Блог про IT </v-card-subtitle>
+          <v-card-title> Developer blog </v-card-title>
+          <v-card-subtitle> Блог про IT </v-card-subtitle>
         </div>
       </v-card>
 
@@ -35,6 +35,7 @@
           :to="item.to"
           router
           exact
+          @click="change"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -63,15 +64,7 @@
       </v-footer>
     </v-navigation-drawer>
 
-    <v-app-bar fixed app>
-      <!-- <v-container> -->
-        <v-breadcrumbs :items="breadcrumbs">
-          <template v-slot:divider>
-            <v-icon>mdi-chevron-right</v-icon>
-          </template>
-        </v-breadcrumbs>
-      <!-- </v-container> -->
-    </v-app-bar>
+    <v-app-bar fixed app dense> </v-app-bar>
 
     <v-main>
       <v-container>
@@ -85,23 +78,6 @@
 export default {
   data() {
     return {
-      breadcrumbs: [
-        {
-          text: "Главная",
-          disabled: false,
-          href: "/",
-        },
-        {
-          text: "Link 1",
-          disabled: false,
-          href: "breadcrumbs_link_1",
-        },
-        {
-          text: "Link 2",
-          disabled: true,
-          href: "breadcrumbs_link_2",
-        },
-      ],
       items: [
         {
           icon: "mdi-home",
@@ -132,6 +108,7 @@ export default {
       miniVariant: false,
     };
   },
+  methods: {},
 };
 </script>
 
@@ -151,7 +128,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 8px;
+  /* padding-left: 8px; */
 }
-
 </style>

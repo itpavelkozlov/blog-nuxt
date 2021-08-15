@@ -16,8 +16,15 @@
       </template>
 
       <template v-slot:label="{ item }">
-        <a v-if="item.countPosts != 0 || item.countChildren != 0" href="" @click.prevent="openCategory(item)">{{ item.name }}</a>
-        <span v-else><strong>{{ item.name }}</strong></span>
+        <a
+          v-if="item.countPosts != 0 || item.countChildren != 0"
+          href=""
+          @click.prevent="openCategory(item)"
+          >{{ item.name }}</a
+        >
+        <span v-else
+          ><strong>{{ item.name }}</strong></span
+        >
         {{ item.countPosts != 0 ? item.countPosts + " постов" : "" }}
         {{ item.countChildren != 0 ? item.countChildren + " категорий" : "" }}
         {{
@@ -34,42 +41,43 @@
 export default {
   data() {
     return {
+      search: null,
       categories: [
         {
           id: 1,
           name: "Golang",
           countPosts: 5,
           countChildren: 6,
-          children: [],
+          children: []
         },
         {
           id: 2,
           name: "Python",
           countPosts: 5,
           countChildren: 6,
-          children: [],
+          children: []
         },
         {
           id: 3,
           name: "JavaScript",
           countPosts: 0,
-          countChildren: 0,
+          countChildren: 0
         },
         {
           id: 4,
           name: "Devops",
           countPosts: 0,
           countChildren: 6,
-          children: [],
+          children: []
         },
         {
           id: 7,
           name: "Разное",
           countPosts: 80,
           countChildren: 0,
-          children: null,
-        },
-      ],
+          children: null
+        }
+      ]
     };
   },
 
@@ -88,13 +96,12 @@ export default {
           name: item.name + "." + item.id,
           children: children,
           countPosts: 5,
-          countChildren: 6,
-        },
+          countChildren: 6
+        }
       ];
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

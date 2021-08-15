@@ -75,7 +75,7 @@ export default {
 
   methods: {
     openCategory(obj) {
-      this.$router.push("category/" + obj.name);
+      this.$router.push("/category/" + obj.name);
     },
     fetch(item) {
       let children = [];

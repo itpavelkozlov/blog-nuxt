@@ -16,8 +16,15 @@
       </template>
 
       <template v-slot:label="{ item }">
-        <a href="" @click.prevent="openCategory(item)">{{ item.name }}</a>
-        {{ item.countPosts + " постов, " + item.countChildren + " категорий" }}
+        <a v-if="item.countPosts != 0 || item.countChildren != 0" href="" @click.prevent="openCategory(item)">{{ item.name }}</a>
+        <span v-else><strong>{{ item.name }}</strong></span>
+        {{ item.countPosts != 0 ? item.countPosts + " постов" : "" }}
+        {{ item.countChildren != 0 ? item.countChildren + " категорий" : "" }}
+        {{
+          item.countPosts == 0 && item.countChildren == 0
+            ? "Пока ничего нет :("
+            : ""
+        }}
       </template>
     </v-treeview>
   </div>
@@ -45,14 +52,13 @@ export default {
         {
           id: 3,
           name: "JavaScript",
-          countPosts: 5,
-          countChildren: 6,
-          children: [],
+          countPosts: 0,
+          countChildren: 0,
         },
         {
           id: 4,
           name: "Devops",
-          countPosts: 5,
+          countPosts: 0,
           countChildren: 6,
           children: [],
         },

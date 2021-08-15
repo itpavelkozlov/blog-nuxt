@@ -3,6 +3,7 @@
     <v-navigation-drawer
       :mini-variant="miniVariant"
       :clipped="false"
+      :touchless="true"
       fixed
       app
       permanent

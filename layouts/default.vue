@@ -35,7 +35,6 @@
           :to="item.to"
           router
           exact
-          @click="change"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -128,6 +127,5 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-left: 8px; */
 }
 </style>

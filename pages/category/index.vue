@@ -4,10 +4,10 @@
     <v-treeview
       return-object
       dense
+      :open.sync="openIds"
       :items="categories"
       item-key="name"
       open-on-click
-      :load-children="fetch"
     >
       <template v-slot:prepend="{ open }">
         <v-icon>
@@ -39,23 +39,62 @@
 
 <script>
 export default {
+  computed: {
+    openIds: {
+      get: function() {
+        return this.$store.getters.OPENIDS;
+      },
+      set: function(newValue) {
+        this.$store.dispatch("SET_OPENIDS", newValue);
+      }
+    }
+  },
   data() {
     return {
-      search: null,
       categories: [
         {
           id: 1,
           name: "Golang",
           countPosts: 5,
           countChildren: 6,
-          children: []
+          children: [
+            {
+              id: 22,
+              name: "Golang 1",
+              countPosts: 5,
+              countChildren: 6,
+              children: []
+            },
+            {
+              id: 23,
+              name: "Golang 2",
+              countPosts: 5,
+              countChildren: 6,
+              children: []
+            }
+          ]
         },
         {
           id: 2,
           name: "Python",
           countPosts: 5,
           countChildren: 6,
-          children: []
+          children: [
+            {
+              id: 32,
+              name: "Python 1",
+              countPosts: 5,
+              countChildren: 6,
+              children: []
+            },
+            {
+              id: 33,
+              name: "Python 2",
+              countPosts: 5,
+              countChildren: 6,
+              children: []
+            }
+          ]
         },
         {
           id: 3,
@@ -68,7 +107,15 @@ export default {
           name: "Devops",
           countPosts: 0,
           countChildren: 6,
-          children: []
+          children: [
+            {
+              id: 43,
+              name: "Devops 1",
+              countPosts: 5,
+              countChildren: 6,
+              children: []
+            }
+          ]
         },
         {
           id: 7,
@@ -85,21 +132,6 @@ export default {
     openCategory(obj) {
       this.$router.push("/category/" + obj.name);
     },
-    fetch(item) {
-      let children = [];
-      if (item.id > 3) {
-        children = null;
-      }
-      item.children = [
-        {
-          id: item.id + 1,
-          name: item.name + "." + item.id,
-          children: children,
-          countPosts: 5,
-          countChildren: 6
-        }
-      ];
-    }
   }
 };
 </script>
